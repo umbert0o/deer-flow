@@ -276,6 +276,7 @@ export const enUS: Translations = {
     description: "Adjust how DeerFlow looks and behaves for you.",
     sections: {
       appearance: "Appearance",
+      chat: "Chat",
       memory: "Memory",
       tools: "Tools",
       skills: "Skills",
@@ -360,6 +361,12 @@ export const enUS: Translations = {
     acknowledge: {
       emptyTitle: "Acknowledgements",
       emptyDescription: "Credits and acknowledgements will show here.",
+    },
+    chat: {
+      title: "Chat Settings",
+      description: "Toggle follow-up questions",
+      followupsDescription:
+        "Follow-up questions suggest next questions you might ask based on the current conversation. Enable to see suggestions after AI responses.",
     },
   },
 };

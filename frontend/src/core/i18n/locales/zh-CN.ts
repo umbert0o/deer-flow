@@ -263,6 +263,7 @@ export const zhCN: Translations = {
     description: "根据你的偏好调整 DeerFlow 的界面和行为。",
     sections: {
       appearance: "外观",
+      chat: "聊天",
       memory: "记忆",
       tools: "工具",
       skills: "技能",
@@ -345,6 +346,12 @@ export const zhCN: Translations = {
     acknowledge: {
       emptyTitle: "致谢",
       emptyDescription: "相关的致谢信息会展示在这里。",
+    },
+    chat: {
+      title: "聊天设置",
+      description: "切换后续问题",
+      followupsDescription:
+        "后续问题会根据当前对话建议您可能提出的下一个问题。启用后在 AI 回答后会显示建议。",
     },
   },
 };

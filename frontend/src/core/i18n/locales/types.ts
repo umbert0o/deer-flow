@@ -213,6 +213,7 @@ export interface Translations {
     description: string;
     sections: {
       appearance: string;
+      chat: string;
       memory: string;
       tools: string;
       skills: string;
@@ -291,6 +292,11 @@ export interface Translations {
     acknowledge: {
       emptyTitle: string;
       emptyDescription: string;
+    };
+    chat: {
+      title: string;
+      description: string;
+      followupsDescription: string;
     };
   };
 }
