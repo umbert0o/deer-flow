@@ -7,6 +7,7 @@ import {
   PaletteIcon,
   SparklesIcon,
   WrenchIcon,
+  MessageSquareIcon,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
@@ -19,6 +20,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AboutSettingsPage } from "@/components/workspace/settings/about-settings-page";
 import { AppearanceSettingsPage } from "@/components/workspace/settings/appearance-settings-page";
+import { ChatSettingsPage } from "@/components/workspace/settings/chat-settings-page";
 import { MemorySettingsPage } from "@/components/workspace/settings/memory-settings-page";
 import { NotificationSettingsPage } from "@/components/workspace/settings/notification-settings-page";
 import { SkillSettingsPage } from "@/components/workspace/settings/skill-settings-page";
@@ -28,6 +30,7 @@ import { cn } from "@/lib/utils";
 
 type SettingsSection =
   | "appearance"
+  | "chat"
   | "memory"
   | "tools"
   | "skills"
@@ -60,6 +63,11 @@ export function SettingsDialog(props: SettingsDialogProps) {
         icon: PaletteIcon,
       },
       {
+        id: "chat",
+        label: t.settings.sections.chat,
+        icon: MessageSquareIcon,
+      },
+      {
         id: "notification",
         label: t.settings.sections.notification,
         icon: BellIcon,
@@ -75,6 +83,7 @@ export function SettingsDialog(props: SettingsDialogProps) {
     ],
     [
       t.settings.sections.appearance,
+      t.settings.sections.chat,
       t.settings.sections.memory,
       t.settings.sections.tools,
       t.settings.sections.skills,
@@ -125,6 +134,7 @@ export function SettingsDialog(props: SettingsDialogProps) {
           <ScrollArea className="h-full min-h-0 rounded-lg border">
             <div className="space-y-8 p-6">
               {activeSection === "appearance" && <AppearanceSettingsPage />}
+              {activeSection === "chat" && <ChatSettingsPage />}
               {activeSection === "memory" && <MemorySettingsPage />}
               {activeSection === "tools" && <ToolSettingsPage />}
               {activeSection === "skills" && (

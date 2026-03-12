@@ -57,6 +57,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { getBackendBaseURL } from "@/core/config";
 import { useI18n } from "@/core/i18n/hooks";
+import { useLocalSettings } from "@/core/settings";
 import { useModels } from "@/core/models/hooks";
 import type { AgentThreadContext } from "@/core/threads";
 import { textOfMessage } from "@/core/threads/utils";
@@ -144,6 +145,8 @@ export function InputBox({
   const [modelDialogOpen, setModelDialogOpen] = useState(false);
   const { models } = useModels();
   const { thread, isMock } = useThread();
+  const [settings] = useLocalSettings();
+  const followupsEnabled = settings.chat.followups_enabled;
   const { textInput } = usePromptInputController();
   const promptRootRef = useRef<HTMLDivElement | null>(null);
 
@@ -312,6 +315,13 @@ export function InputBox({
       return;
     }
 
+    if (!followupsEnabled) {
+      setFollowups([]);
+      setFollowupsLoading(false);
+      setFollowupsHidden(true);
+      return;
+    }
+
     const lastAi = [...thread.messages].reverse().find((m) => m.type === "ai");
     const lastAiId = lastAi?.id ?? null;
     if (!lastAiId || lastAiId === lastGeneratedForAiIdRef.current) {
@@ -369,7 +379,7 @@ export function InputBox({
       });
 
     return () => controller.abort();
-  }, [context.model_name, disabled, isMock, status, thread.messages, threadId]);
+  }, [context.model_name, disabled, followupsEnabled, isMock, status, thread.messages, threadId]);
 
   return (
     <div ref={promptRootRef} className="relative">
@@ -747,6 +757,7 @@ export function InputBox({
 
       {!disabled &&
         !isNewThread &&
+        followupsEnabled &&
         !followupsHidden &&
         (followupsLoading || followups.length > 0) && (
           <div className="absolute right-0 -top-20 left-0 z-20 flex items-center justify-center">
